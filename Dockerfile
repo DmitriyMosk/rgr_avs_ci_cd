@@ -1,7 +1,9 @@
-FROM ubuntu:22.04 
+FROM python:latest-slim
 
-USER root
-RUN apt-get update && apt-get install -y python3 python3-pip git 
-RUN git clone https://github.com/DmitriyMosk/rgr_avs_ci_cd
+WORKDIR /app
 
-ENTRYPOINT [ "python3 main.py" ]
+COPY . /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["python3", "main.py"]
